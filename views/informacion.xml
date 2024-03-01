@@ -9,6 +9,19 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="informacion_pivot_view">
+            <field name="name">informacion.pivot</field>
+            <field name="model">odoo_basico.informacion</field>
+            <field name="arch" type="xml">
+                <pivot string="pivotando">
+                    <field name="alto_en_cms" type="row"/>
+                    <field name="sexo_traducido" type="col"/>
+                    <field name="densidade" type="measure"/>
+                    <field name="peso" type="measure"/>
+                    <field name="volume" type="measure"/>
+                </pivot>
+            </field>
+        </record>
         <!-- explicit list view definition -->
         <record model="ir.ui.view" id="informacion_graph_view">
             <field name="name">informacion.grafico</field>
@@ -25,6 +38,12 @@
             <field name="model">odoo_basico.informacion</field>
             <field name="arch" type="xml">
                 <form string="Formulario de Información">
+                    <header>
+                        <button name="ver_contexto" type="object" string="Ver Contexto"/>
+                        <button name="envio_email" type="object" string="Enviar Email"/>
+                        <button name="actualiza_hora_actual_UTC" type="object" string="Actualiza hora actual a UTC"/>
+                        <button name="actualiza_hora_timezone_usuario_dende_boton_e_apidepends" type="object" string="Actualiza Hora a Timezone do Usuario"  class="oe_highlight"/>
+                    </header>
                     <sheet>
                         <group>
                             <field name="name"/>
@@ -54,17 +73,44 @@
                             </page>
                             <page string="Binary">
                                 <group>
-
+                                    <group>
+                                        <field name="foto" widget="image" class="oe_avatar"/>
+                                        <field name="adxunto_nome" invisible="1"/>
+                                        <field name="adxunto" filename="adxunto_nome"/>
+                                    </group>
+                                    <group>
+                                        <field name="foto" widget="image"/>
+                                    </group>
                                 </group>
                             </page>
                             <page string="Moedas">
                                 <group>
-
+                                    <group>
+                                        <field name="moeda_id"/>
+                                        <field name="moeda_en_texto"/>
+                                        <field name="creador_da_moeda"/>
+                                    </group>
+                                    <group>
+                                        <field name="moeda_euro_id" invisible="1"/>
+                                        <field name="gasto_en_euros"/>
+                                    </group>
                                 </group>
                             </page>
-                            <page string="Data e Hora">
+                            <page string="Datas">
                                 <group>
-
+                                    <group>
+                                        <field name="data_hora"/>
+                                        <field name="hora_utc"/>
+                                        <field name="hora_actual"/>
+                                        <field name="hora_timezone_usuario"/>
+                                    </group>
+                                    <group>
+                                        <field name="data"/>
+                                        <field name="mes_castelan"/>
+                                        <field name="mes_galego"/>
+                                        <field name="mes_ingles"/>
+                                        <field name="mes_frances"/>
+                                    </group>
                                 </group>
                             </page>
                         </notebook>
@@ -88,6 +134,16 @@
                     <field name="densidade"/>
                     <field name="autorizado"/>
                     <field name="sexo_traducido"/>
+                    <field name="moeda_id"/>
+                    <field name="data"/>
+                    <field name="data_hora"/>
+                    <field name="hora_utc"/>
+                    <field name="hora_timezone_usuario"/>
+                    <field name="hora_actual"/>
+                    <field name="mes_castelan"/>
+                    <field name="mes_galego"/>
+                    <field name="mes_ingles"/>
+                    <field name="mes_frances"/>
                 </tree>
             </field>
         </record>
@@ -118,20 +174,6 @@
             <field name="user_id"></field><!-- En blanco para que esté dispoñible para todos os usuarios -->
             <field name="action_id"
                    eval="ref('odoo_basico.informacion_list_action')"/><!-- Obtemos o id a partir do id externo-->
-        </record>
-
-        <record model="ir.ui.view" id="informacion_pivot_view">
-            <field name="name">informacion.pivot</field>
-            <field name="model">odoo_basico.informacion</field>
-            <field name="arch" type="xml">
-                <pivot string="pivotando">
-                    <field name="alto_en_cms" type="row"/>
-                    <field name="sexo_traducido" type="col"/>
-                    <field name="densidade" type="measure"/>
-                    <field name="peso" type="measure"/>
-                    <field name="volume" type="measure"/>
-                </pivot>
-            </field>
         </record>
     </data>
 </odoo>
